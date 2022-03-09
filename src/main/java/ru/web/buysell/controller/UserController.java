@@ -26,11 +26,11 @@ public class UserController {
     public String getUser(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "user-page";
-    }*/
+    }
 
     @GetMapping("/users/{id}")
     public String showUserId(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("users", userService.readUser(id));
         return "user-page";
-    }
+    }*/
 }

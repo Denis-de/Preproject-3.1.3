@@ -1,11 +1,11 @@
 package ru.web.buysell.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.web.buysell.model.Role;
 import ru.web.buysell.model.User;
 import ru.web.buysell.service.UserService;
 
@@ -18,6 +18,13 @@ public class AdminController {
     @Autowired
     public AdminController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/user")
+    public String getUserInfo(Authentication authentication, Model model) {
+        User user = userService.getUserByName(authentication.getName());
+        model.addAttribute("user", user);
+        return "user";
     }
 
     @GetMapping("/admin")
@@ -45,8 +52,8 @@ public class AdminController {
     }
 
     @GetMapping("/user-update/{id}")
-    public String editUserForm(@PathVariable(value = "id") Long id, Model model) {
-        User user = userService.readUser(id);
+    public String editUserForm(@PathVariable("id") Long id, Model model) {
+        User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "/user-update";
     }

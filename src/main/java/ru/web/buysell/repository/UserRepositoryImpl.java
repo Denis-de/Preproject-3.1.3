@@ -30,13 +30,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User readUser(Long id) {
+    public User getUserById(Long id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
     public User deleteUser(Long id) throws NullPointerException {
-        User user = readUser(id);
+        User user = getUserById(id);
         if (null == user) {
             throw new NullPointerException("User not found");
         }

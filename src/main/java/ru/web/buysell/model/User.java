@@ -23,6 +23,8 @@ public class User implements UserDetails {
 
     private int age;
 
+    private String email;
+
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -33,11 +35,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String firstName, String lastName, int age, String password, Set<Role> roles) {
+    public User(String username, String firstName, String lastName, int age, String email, String password, Set<Role> roles) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.email=email;
         this.password = password;
         this.roles = roles;
     }
@@ -108,6 +111,13 @@ public class User implements UserDetails {
         this.age = age;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String getPassword() {
@@ -126,7 +136,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,13 +146,14 @@ public class User implements UserDetails {
                 Objects.equals(username, user.username) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, firstName, lastName, age, password, roles);
+        return Objects.hash(id, username, firstName, lastName, age, email, password, roles);
     }
 
     @Override
@@ -154,6 +164,7 @@ public class User implements UserDetails {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';

@@ -25,12 +25,10 @@ public class DBInit {
     public void myInit() {
         Set<Role> setAdmin = new HashSet<>();
         Set<Role> setUser = new HashSet<>();
-        Role roleAdmin = new Role("ADMIN");
-        Role roleUser = new Role("USER");
-        setAdmin.add(roleAdmin);
-        User admin = new User("ADMIN", "ADMIN", "ADMIN", 21, "aaa", setAdmin);
-        setUser.add(roleUser);
-        User user = new User("USER", "USER", "USER", 22, "uuu", setUser);
+        setAdmin.add(new Role("ADMIN"));
+        User admin = new User("ADMIN", "ADMIN", "ADMIN", 21, "admin@mail.ru", "aaa", setAdmin);
+        setUser.add(new Role("USER"));
+        User user = new User("USER", "USER", "USER", 22, "user@mail.ru", "uuu", setUser);
         userService.createUser(admin);
         userService.createUser(user);
     }
